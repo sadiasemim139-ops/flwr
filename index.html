@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Petal Studio — a premium gallery showcasing Art Flowers, Edited Flowers, and AI-generated Flowers. Discover the most stunning floral art from every creative dimension." />
+  <title>Petal Studio — Art · Edited · AI Flowers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════ CURSOR FOLLOWER ══════════════════════ -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ══════════════════════ PARTICLES ══════════════════════ -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- ══════════════════════ LOADER ══════════════════════ -->
+  <div class="loader" id="loader">
+    <div class="loader-flower">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g class="petal-group">
+          <ellipse class="petal" cx="50" cy="25" rx="8" ry="20" fill="url(#petalGrad)" />
+          <ellipse class="petal" cx="75" cy="50" rx="8" ry="20" fill="url(#petalGrad)" transform="rotate(90,50,50)" />
+          <ellipse class="petal" cx="50" cy="75" rx="8" ry="20" fill="url(#petalGrad)" transform="rotate(180,50,50)" />
+          <ellipse class="petal" cx="25" cy="50" rx="8" ry="20" fill="url(#petalGrad)" transform="rotate(270,50,50)" />
+          <ellipse class="petal" cx="72" cy="28" rx="8" ry="20" fill="url(#petalGrad2)" transform="rotate(45,50,50)" />
+          <ellipse class="petal" cx="72" cy="72" rx="8" ry="20" fill="url(#petalGrad2)" transform="rotate(135,50,50)" />
+          <ellipse class="petal" cx="28" cy="72" rx="8" ry="20" fill="url(#petalGrad2)" transform="rotate(225,50,50)" />
+          <ellipse class="petal" cx="28" cy="28" rx="8" ry="20" fill="url(#petalGrad2)" transform="rotate(315,50,50)" />
+          <circle cx="50" cy="50" r="12" fill="url(#centerGrad)" />
+        </g>
+        <defs>
+          <radialGradient id="petalGrad" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#f9a8d4" />
+            <stop offset="100%" stop-color="#ec4899" />
+          </radialGradient>
+          <radialGradient id="petalGrad2" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#c084fc" />
+            <stop offset="100%" stop-color="#9333ea" />
+          </radialGradient>
+          <radialGradient id="centerGrad" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#fde68a" />
+            <stop offset="100%" stop-color="#f59e0b" />
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+    <p class="loader-text">Petal Studio</p>
+  </div>
+
+  <!-- ══════════════════════ NAVIGATION ══════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo" id="navLogo">
+        <span class="logo-icon">✿</span>
+        <span class="logo-text">Petal Studio</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active" id="navHome">Home</a></li>
+        <li><a href="#art" class="nav-link" id="navArt">Art Flowers</a></li>
+        <li><a href="#edited" class="nav-link" id="navEdited">Edited</a></li>
+        <li><a href="#ai" class="nav-link" id="navAI">AI Flowers</a></li>
+        <li><a href="#about" class="nav-link" id="navAbout">About</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>Welcome to Petal Studio</span>
+      </div>
+      <h1 class="hero-title">
+        Where Flowers<br />
+        <span class="gradient-text">Become Art</span>
+      </h1>
+      <p class="hero-subtitle">
+        Explore three worlds of floral beauty — hand-crafted <em>Art</em>, 
+        digitally <em>Edited</em>, and breathtaking <em>AI-generated</em> flowers.
+      </p>
+      <div class="hero-cta">
+        <a href="#art" class="btn btn-primary" id="heroExplore">Explore Gallery</a>
+        <a href="#about" class="btn btn-ghost" id="heroAbout">Learn More</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number" data-target="120">0</span>
+          <span class="stat-label">Art Pieces</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number" data-target="85">0</span>
+          <span class="stat-label">Edits</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number" data-target="200">0</span>
+          <span class="stat-label">AI Blooms</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-flower-ring">
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
+        <div class="hero-img-wrapper">
+          <img src="art_flower.png" alt="Featured flower artwork" class="hero-img" id="heroImg" />
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator" id="scrollIndicator">
+      <div class="scroll-dot"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ CATEGORY INTRO CARDS ══════════════════════ -->
+  <section class="categories" id="categories">
+    <div class="section-header">
+      <span class="section-tag">Our Collections</span>
+      <h2 class="section-title">Three Worlds of Floral <span class="gradient-text">Beauty</span></h2>
+    </div>
+    <div class="category-cards">
+      <a href="#art" class="cat-card cat-art" id="catArt">
+        <div class="cat-icon">🎨</div>
+        <h3>Art Flowers</h3>
+        <p>Handcrafted botanical illustrations, watercolors, oil paintings, and fine art interpretations of flowers throughout history.</p>
+        <div class="cat-arrow">→</div>
+        <div class="cat-glow"></div>
+      </a>
+      <a href="#edited" class="cat-card cat-edited" id="catEdited">
+        <div class="cat-icon">✨</div>
+        <h3>Edited Flowers</h3>
+        <p>Digitally transformed floral photography — dramatic color grades, double exposures, surreal composites, and creative retouching.</p>
+        <div class="cat-arrow">→</div>
+        <div class="cat-glow"></div>
+      </a>
+      <a href="#ai" class="cat-card cat-ai" id="catAI">
+        <div class="cat-icon">🤖</div>
+        <h3>AI Flowers</h3>
+        <p>Impossible blooms conjured by artificial intelligence — futuristic, surreal, and utterly unlike anything found in nature.</p>
+        <div class="cat-arrow">→</div>
+        <div class="cat-glow"></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ ART FLOWERS SECTION ══════════════════════ -->
+  <section class="gallery-section" id="art">
+    <div class="section-bg section-bg-art"></div>
+    <div class="section-header">
+      <span class="section-tag tag-art">Art Collection</span>
+      <h2 class="section-title">🎨 Art <span class="gradient-text-art">Flowers</span></h2>
+      <p class="section-desc">Timeless beauty expressed through paint, ink, and the artist's hand. Every piece tells a story of nature reimagined.</p>
+    </div>
+    <div class="gallery-filter" id="artFilter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="watercolor">Watercolor</button>
+      <button class="filter-btn" data-filter="oil">Oil Painting</button>
+      <button class="filter-btn" data-filter="sketch">Sketch</button>
+    </div>
+    <div class="gallery-grid" id="artGallery">
+      <div class="gallery-item featured" data-category="watercolor">
+        <div class="gallery-img-wrap">
+          <img src="art_flower.png" alt="Watercolor Botanical Bouquet" loading="lazy" />
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Botanical Bouquet</h4>
+              <p>Watercolor · 2024</p>
+              <button class="btn-view" onclick="openLightbox('art_flower.png','Botanical Bouquet','Watercolor · 2024','A stunning watercolor arrangement of roses, peonies, and lilies in a classic botanical illustration style.')">View</button>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-badge">Featured</div>
+      </div>
+
+      <div class="gallery-item" data-category="oil">
+        <div class="gallery-img-wrap art-placeholder ap-1">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="400" fill="#1a0a2e"/>
+              <ellipse cx="200" cy="160" rx="60" ry="80" fill="#f4a261" opacity="0.9"/>
+              <ellipse cx="200" cy="160" rx="45" ry="65" fill="#e76f51" opacity="0.8"/>
+              <ellipse cx="200" cy="165" rx="25" ry="40" fill="#d62828" opacity="0.9"/>
+              <circle cx="200" cy="180" r="15" fill="#f0a500"/>
+              <ellipse cx="200" cy="280" rx="10" ry="80" fill="#2d6a4f"/>
+              <ellipse cx="175" cy="260" rx="30" ry="15" fill="#40916c" transform="rotate(-30,175,260)"/>
+              <ellipse cx="225" cy="270" rx="30" ry="15" fill="#40916c" transform="rotate(30,225,270)"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Golden Sunflower</h4>
+              <p>Oil Painting · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Golden Sunflower','Oil Painting · 2024','Rich impasto oil painting technique capturing the warmth and vibrancy of a single sunflower in full bloom.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="watercolor">
+        <div class="gallery-img-wrap art-placeholder ap-2">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="400" fill="#f0e6fa"/>
+              <ellipse cx="200" cy="180" rx="50" ry="70" fill="#d8b4fe" opacity="0.6"/>
+              <ellipse cx="160" cy="190" rx="45" ry="65" fill="#c084fc" opacity="0.5" transform="rotate(-40,160,190)"/>
+              <ellipse cx="240" cy="190" rx="45" ry="65" fill="#a855f7" opacity="0.5" transform="rotate(40,240,190)"/>
+              <ellipse cx="200" cy="220" rx="45" ry="65" fill="#9333ea" opacity="0.4" transform="rotate(20,200,220)"/>
+              <circle cx="200" cy="190" r="20" fill="#fde68a"/>
+              <circle cx="200" cy="190" r="12" fill="#f59e0b"/>
+              <ellipse cx="200" cy="310" rx="8" ry="70" fill="#86efac"/>
+              <ellipse cx="170" cy="290" rx="35" ry="14" fill="#4ade80" transform="rotate(-25,170,290)"/>
+              <ellipse cx="230" cy="300" rx="35" ry="14" fill="#4ade80" transform="rotate(25,230,300)"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Lavender Dream</h4>
+              <p>Watercolor · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Lavender Dream','Watercolor · 2024','Delicate watercolor washes in violet and purple hues capture the ethereal quality of lavender in bloom.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="sketch">
+        <div class="gallery-img-wrap art-placeholder ap-3">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="400" fill="#fafaf8"/>
+              <circle cx="200" cy="170" r="30" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+              <ellipse cx="200" cy="110" rx="18" ry="40" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>
+              <ellipse cx="200" cy="110" rx="18" ry="40" fill="none" stroke="#2a2a2a" stroke-width="1.5" transform="rotate(45,200,170)"/>
+              <ellipse cx="200" cy="110" rx="18" ry="40" fill="none" stroke="#2a2a2a" stroke-width="1.5" transform="rotate(90,200,170)"/>
+              <ellipse cx="200" cy="110" rx="18" ry="40" fill="none" stroke="#2a2a2a" stroke-width="1.5" transform="rotate(135,200,170)"/>
+              <ellipse cx="200" cy="110" rx="18" ry="40" fill="none" stroke="#2a2a2a" stroke-width="1.5" transform="rotate(180,200,170)"/>
+              <ellipse cx="200" cy="110" rx="18" ry="40" fill="none" stroke="#2a2a2a" stroke-width="1.5" transform="rotate(225,200,170)"/>
+              <ellipse cx="200" cy="110" rx="18" ry="40" fill="none" stroke="#2a2a2a" stroke-width="1.5" transform="rotate(270,200,170)"/>
+              <ellipse cx="200" cy="110" rx="18" ry="40" fill="none" stroke="#2a2a2a" stroke-width="1.5" transform="rotate(315,200,170)"/>
+              <line x1="200" y1="200" x2="200" y2="360" stroke="#1a1a1a" stroke-width="2"/>
+              <ellipse cx="175" cy="300" rx="30" ry="12" fill="none" stroke="#1a1a1a" stroke-width="1.5" transform="rotate(-30,175,300)"/>
+              <ellipse cx="225" cy="320" rx="30" ry="12" fill="none" stroke="#1a1a1a" stroke-width="1.5" transform="rotate(30,225,320)"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Rose Botanical Study</h4>
+              <p>Pencil Sketch · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Rose Botanical Study','Pencil Sketch · 2024','A detailed botanical pencil study showing the delicate structure and form of a classic garden rose.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="oil">
+        <div class="gallery-img-wrap art-placeholder ap-4">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="400" fill="#1c1a2e"/>
+              <ellipse cx="200" cy="200" rx="80" ry="80" fill="#ff6b9d" opacity="0.3"/>
+              <ellipse cx="200" cy="140" rx="35" ry="55" fill="#ff6b9d" opacity="0.8"/>
+              <ellipse cx="200" cy="140" rx="35" ry="55" fill="#e91e8c" opacity="0.7" transform="rotate(60,200,200)"/>
+              <ellipse cx="200" cy="140" rx="35" ry="55" fill="#c2185b" opacity="0.6" transform="rotate(120,200,200)"/>
+              <ellipse cx="200" cy="140" rx="35" ry="55" fill="#ff6b9d" opacity="0.6" transform="rotate(180,200,200)"/>
+              <ellipse cx="200" cy="140" rx="35" ry="55" fill="#e91e8c" opacity="0.5" transform="rotate(240,200,200)"/>
+              <ellipse cx="200" cy="140" rx="35" ry="55" fill="#c2185b" opacity="0.5" transform="rotate(300,200,200)"/>
+              <circle cx="200" cy="200" r="22" fill="#ffd54f"/>
+              <circle cx="200" cy="200" r="12" fill="#ff8f00"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Midnight Peony</h4>
+              <p>Oil Painting · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Midnight Peony','Oil Painting · 2024','Deep moody oil painting with rich magenta peonies emerging dramatically from a dark canvas background.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="watercolor">
+        <div class="gallery-img-wrap art-placeholder ap-5">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="400" fill="#e8f5e9"/>
+              <circle cx="130" cy="150" r="35" fill="#ffb3c6" opacity="0.7"/>
+              <circle cx="200" cy="120" r="40" fill="#ff8fab" opacity="0.7"/>
+              <circle cx="270" cy="150" r="35" fill="#fb6f92" opacity="0.7"/>
+              <circle cx="155" cy="200" r="32" fill="#ff4d6d" opacity="0.6"/>
+              <circle cx="245" cy="200" r="32" fill="#c9184a" opacity="0.6"/>
+              <ellipse cx="200" cy="320" rx="12" ry="90" fill="#52b788"/>
+              <ellipse cx="155" cy="280" rx="40" ry="16" fill="#74c69d" transform="rotate(-35,155,280)"/>
+              <ellipse cx="245" cy="290" rx="40" ry="16" fill="#74c69d" transform="rotate(35,245,290)"/>
+              <ellipse cx="120" cy="310" rx="35" ry="13" fill="#95d5b2" transform="rotate(-20,120,310)"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Cherry Blossom Garden</h4>
+              <p>Watercolor · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Cherry Blossom Garden','Watercolor · 2024','A loose, expressive watercolor painting of a Japanese cherry blossom garden at full bloom.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ EDITED FLOWERS SECTION ══════════════════════ -->
+  <section class="gallery-section" id="edited">
+    <div class="section-bg section-bg-edited"></div>
+    <div class="section-header">
+      <span class="section-tag tag-edited">Edited Collection</span>
+      <h2 class="section-title">✨ Edited <span class="gradient-text-edited">Flowers</span></h2>
+      <p class="section-desc">Photography meets digital artistry. Each image is transformed through masterful editing into something extraordinary.</p>
+    </div>
+    <div class="gallery-filter" id="editedFilter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="colorgrade">Color Grade</button>
+      <button class="filter-btn" data-filter="exposure">Double Exposure</button>
+      <button class="filter-btn" data-filter="macro">Macro</button>
+    </div>
+    <div class="gallery-grid" id="editedGallery">
+      <div class="gallery-item featured" data-category="colorgrade">
+        <div class="gallery-img-wrap">
+          <img src="edited_flower.png" alt="Neon Rose — Color Graded" loading="lazy" />
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Neon Rose</h4>
+              <p>Color Grade · 2024</p>
+              <button class="btn-view" onclick="openLightbox('edited_flower.png','Neon Rose','Color Grade · 2024','Dramatic cyberpunk color grading transforms a classic red rose into a neon-lit masterpiece against a dark background.')">View</button>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-badge badge-edited">Featured</div>
+      </div>
+
+      <div class="gallery-item" data-category="exposure">
+        <div class="gallery-img-wrap art-placeholder ep-1">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="egrd1" cx="40%" cy="40%">
+                  <stop offset="0%" stop-color="#7c3aed"/>
+                  <stop offset="60%" stop-color="#1e1b4b"/>
+                  <stop offset="100%" stop-color="#0f0f1a"/>
+                </radialGradient>
+              </defs>
+              <rect width="400" height="400" fill="url(#egrd1)"/>
+              <ellipse cx="180" cy="180" rx="100" ry="130" fill="none" stroke="#60a5fa" stroke-width="1" opacity="0.5"/>
+              <ellipse cx="200" cy="150" rx="60" ry="80" fill="#818cf8" opacity="0.3"/>
+              <ellipse cx="200" cy="150" rx="40" ry="60" fill="#a78bfa" opacity="0.4"/>
+              <circle cx="200" cy="160" r="15" fill="#e0aaff" opacity="0.8"/>
+              <!-- stars -->
+              <circle cx="60" cy="80" r="1.5" fill="white" opacity="0.8"/>
+              <circle cx="340" cy="60" r="1" fill="white" opacity="0.6"/>
+              <circle cx="100" cy="320" r="1" fill="white" opacity="0.7"/>
+              <circle cx="360" cy="280" r="1.5" fill="white" opacity="0.5"/>
+              <circle cx="280" cy="340" r="1" fill="white" opacity="0.8"/>
+              <text x="200" y="370" text-anchor="middle" fill="#a78bfa" font-size="12" opacity="0.6">Galaxy Tulip · Double Exposure</text>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Galaxy Tulip</h4>
+              <p>Double Exposure · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Galaxy Tulip','Double Exposure · 2024','A mesmerizing double exposure blending a white tulip with a swirling galaxy in deep indigo and violet tones.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="macro">
+        <div class="gallery-img-wrap art-placeholder ep-2">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="egrd2" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#fbbf24"/>
+                  <stop offset="40%" stop-color="#d97706"/>
+                  <stop offset="100%" stop-color="#1c0a00"/>
+                </radialGradient>
+              </defs>
+              <rect width="400" height="400" fill="#0a0a0a"/>
+              <circle cx="200" cy="200" r="160" fill="url(#egrd2)" opacity="0.15"/>
+              <circle cx="200" cy="200" r="10" fill="#fde68a"/>
+              <circle cx="200" cy="200" r="5" fill="#fff"/>
+              <!-- petal veins macro style -->
+              <line x1="200" y1="200" x2="200" y2="60" stroke="#fbbf24" stroke-width="0.5" opacity="0.6"/>
+              <line x1="200" y1="200" x2="200" y2="340" stroke="#fbbf24" stroke-width="0.5" opacity="0.6"/>
+              <line x1="200" y1="200" x2="60" y2="200" stroke="#fbbf24" stroke-width="0.5" opacity="0.6"/>
+              <line x1="200" y1="200" x2="340" y2="200" stroke="#fbbf24" stroke-width="0.5" opacity="0.6"/>
+              <ellipse cx="200" cy="130" rx="30" ry="70" fill="#fbbf24" opacity="0.6"/>
+              <ellipse cx="200" cy="130" rx="30" ry="70" fill="#f59e0b" opacity="0.5" transform="rotate(45,200,200)"/>
+              <ellipse cx="200" cy="130" rx="30" ry="70" fill="#d97706" opacity="0.4" transform="rotate(90,200,200)"/>
+              <ellipse cx="200" cy="130" rx="30" ry="70" fill="#fbbf24" opacity="0.4" transform="rotate(135,200,200)"/>
+              <ellipse cx="200" cy="130" rx="30" ry="70" fill="#f59e0b" opacity="0.3" transform="rotate(180,200,200)"/>
+              <ellipse cx="200" cy="130" rx="30" ry="70" fill="#d97706" opacity="0.3" transform="rotate(225,200,200)"/>
+              <ellipse cx="200" cy="130" rx="30" ry="70" fill="#fbbf24" opacity="0.3" transform="rotate(270,200,200)"/>
+              <ellipse cx="200" cy="130" rx="30" ry="70" fill="#f59e0b" opacity="0.3" transform="rotate(315,200,200)"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Golden Macro</h4>
+              <p>Macro Edit · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Golden Macro','Macro Edit · 2024','An extreme macro close-up of a daisy center with dramatic warm color grading revealing hidden micro-details.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="colorgrade">
+        <div class="gallery-img-wrap art-placeholder ep-3">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="egrd3" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00b4d8"/>
+                  <stop offset="50%" stop-color="#0077b6"/>
+                  <stop offset="100%" stop-color="#03045e"/>
+                </linearGradient>
+              </defs>
+              <rect width="400" height="400" fill="url(#egrd3)"/>
+              <ellipse cx="200" cy="180" rx="55" ry="75" fill="#90e0ef" opacity="0.5"/>
+              <ellipse cx="200" cy="180" rx="55" ry="75" fill="#caf0f8" opacity="0.4" transform="rotate(60,200,200)"/>
+              <ellipse cx="200" cy="180" rx="55" ry="75" fill="#90e0ef" opacity="0.3" transform="rotate(120,200,200)"/>
+              <ellipse cx="200" cy="180" rx="55" ry="75" fill="#48cae4" opacity="0.3" transform="rotate(180,200,200)"/>
+              <ellipse cx="200" cy="180" rx="55" ry="75" fill="#00b4d8" opacity="0.3" transform="rotate(240,200,200)"/>
+              <ellipse cx="200" cy="180" rx="55" ry="75" fill="#0096c7" opacity="0.3" transform="rotate(300,200,200)"/>
+              <circle cx="200" cy="200" r="18" fill="#ade8f4"/>
+              <circle cx="200" cy="200" r="8" fill="#fff" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Ocean Blue Lotus</h4>
+              <p>Color Grade · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Ocean Blue Lotus','Color Grade · 2024','A lotus flower reimagined in oceanic cyan and deep navy blue hues through expert color grading.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="exposure">
+        <div class="gallery-img-wrap art-placeholder ep-4">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="egrd4" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#4a1942"/>
+                  <stop offset="100%" stop-color="#0d0d0d"/>
+                </radialGradient>
+              </defs>
+              <rect width="400" height="400" fill="url(#egrd4)"/>
+              <ellipse cx="200" cy="190" rx="70" ry="90" fill="#f43f5e" opacity="0.2"/>
+              <path d="M200,120 C230,140 240,180 220,200 C240,220 230,260 200,280 C170,260 160,220 180,200 C160,180 170,140 200,120Z" fill="#f43f5e" opacity="0.5"/>
+              <path d="M130,170 C150,160 190,170 200,190 C190,210 160,215 140,210 C120,200 120,180 130,170Z" fill="#fb7185" opacity="0.4"/>
+              <path d="M270,170 C250,160 210,170 200,190 C210,210 240,215 260,210 C280,200 280,180 270,170Z" fill="#fb7185" opacity="0.4"/>
+              <circle cx="200" cy="190" r="14" fill="#fda4af"/>
+              <circle cx="200" cy="190" r="6" fill="#fff" opacity="0.8"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Crimson Phantom</h4>
+              <p>Double Exposure · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Crimson Phantom','Double Exposure · 2024','Dark and dramatic double exposure art merging a red rose silhouette with abstract light trails.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="macro">
+        <div class="gallery-img-wrap art-placeholder ep-5">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="egrd5" cx="50%" cy="30%">
+                  <stop offset="0%" stop-color="#f9a8d4"/>
+                  <stop offset="50%" stop-color="#ec4899"/>
+                  <stop offset="100%" stop-color="#500724"/>
+                </radialGradient>
+              </defs>
+              <rect width="400" height="400" fill="url(#egrd5)"/>
+              <ellipse cx="200" cy="200" rx="150" ry="130" fill="#fce7f3" opacity="0.1"/>
+              <ellipse cx="200" cy="200" rx="100" ry="90" fill="#fbcfe8" opacity="0.15"/>
+              <path d="M200,80 Q250,130 200,200 Q150,130 200,80Z" fill="#f9a8d4" opacity="0.7"/>
+              <path d="M320,200 Q270,250 200,200 Q270,150 320,200Z" fill="#ec4899" opacity="0.6"/>
+              <path d="M200,320 Q150,270 200,200 Q250,270 200,320Z" fill="#db2777" opacity="0.7"/>
+              <path d="M80,200 Q130,150 200,200 Q130,250 80,200Z" fill="#f9a8d4" opacity="0.6"/>
+              <circle cx="200" cy="200" r="25" fill="#fde68a" opacity="0.9"/>
+              <circle cx="200" cy="200" r="10" fill="#f59e0b"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Pink Orchid Close-up</h4>
+              <p>Macro Edit · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Pink Orchid Close-up','Macro Edit · 2024','An intimate macro study of a pink orchid with warm gradient edits highlighting the delicate petal structure.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ AI FLOWERS SECTION ══════════════════════ -->
+  <section class="gallery-section" id="ai">
+    <div class="section-bg section-bg-ai"></div>
+    <div class="section-header">
+      <span class="section-tag tag-ai">AI Collection</span>
+      <h2 class="section-title">🤖 AI <span class="gradient-text-ai">Flowers</span></h2>
+      <p class="section-desc">Beyond nature's limits. Artificial intelligence dreams up impossible blooms that exist only in the digital realm.</p>
+    </div>
+    <div class="gallery-filter" id="aiFilter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="surreal">Surreal</button>
+      <button class="filter-btn" data-filter="futuristic">Futuristic</button>
+      <button class="filter-btn" data-filter="crystal">Crystal</button>
+    </div>
+    <div class="gallery-grid" id="aiGallery">
+      <div class="gallery-item featured" data-category="surreal">
+        <div class="gallery-img-wrap">
+          <img src="ai_flower.png" alt="Bioluminescent Nebula Bloom" loading="lazy" />
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Nebula Bloom</h4>
+              <p>AI Surreal · 2024</p>
+              <button class="btn-view" onclick="openLightbox('ai_flower.png','Nebula Bloom','AI Surreal · 2024','A bioluminescent flower floating in a cosmic nebula, generated entirely by artificial intelligence — a bloom that could never exist in nature.')">View</button>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-badge badge-ai">AI Generated</div>
+      </div>
+
+      <div class="gallery-item" data-category="crystal">
+        <div class="gallery-img-wrap art-placeholder aip-1">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="aigrd1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#06b6d4"/>
+                  <stop offset="50%" stop-color="#8b5cf6"/>
+                  <stop offset="100%" stop-color="#ec4899"/>
+                </linearGradient>
+                <filter id="glow1">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect width="400" height="400" fill="#050510"/>
+              <polygon points="200,80 230,150 300,150 245,195 265,265 200,220 135,265 155,195 100,150 170,150" fill="url(#aigrd1)" opacity="0.8" filter="url(#glow1)"/>
+              <polygon points="200,110 222,160 275,160 232,188 248,240 200,210 152,240 168,188 125,160 178,160" fill="#e0f2fe" opacity="0.3"/>
+              <circle cx="200" cy="190" r="20" fill="url(#aigrd1)" filter="url(#glow1)"/>
+              <circle cx="200" cy="190" r="8" fill="white"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Crystal Star</h4>
+              <p>AI Crystal · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Crystal Star','AI Crystal · 2024','An impossible crystalline flower with geometric faceted petals that refract light into prismatic rainbow patterns.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="futuristic">
+        <div class="gallery-img-wrap art-placeholder aip-2">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="aigrd2" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#00ff88"/>
+                  <stop offset="50%" stop-color="#00aa55"/>
+                  <stop offset="100%" stop-color="#001a0d"/>
+                </radialGradient>
+                <filter id="glow2">
+                  <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect width="400" height="400" fill="#000d06"/>
+              <!-- grid lines -->
+              <line x1="0" y1="200" x2="400" y2="200" stroke="#00ff88" stroke-width="0.3" opacity="0.2"/>
+              <line x1="200" y1="0" x2="200" y2="400" stroke="#00ff88" stroke-width="0.3" opacity="0.2"/>
+              <circle cx="200" cy="200" r="150" fill="none" stroke="#00ff88" stroke-width="0.5" opacity="0.15"/>
+              <circle cx="200" cy="200" r="100" fill="none" stroke="#00ff88" stroke-width="0.5" opacity="0.2"/>
+              <circle cx="200" cy="200" r="50" fill="none" stroke="#00ff88" stroke-width="0.5" opacity="0.3"/>
+              <ellipse cx="200" cy="130" rx="25" ry="60" fill="url(#aigrd2)" filter="url(#glow2)" opacity="0.9"/>
+              <ellipse cx="200" cy="130" rx="25" ry="60" fill="url(#aigrd2)" filter="url(#glow2)" opacity="0.8" transform="rotate(72,200,200)"/>
+              <ellipse cx="200" cy="130" rx="25" ry="60" fill="url(#aigrd2)" filter="url(#glow2)" opacity="0.7" transform="rotate(144,200,200)"/>
+              <ellipse cx="200" cy="130" rx="25" ry="60" fill="url(#aigrd2)" filter="url(#glow2)" opacity="0.8" transform="rotate(216,200,200)"/>
+              <ellipse cx="200" cy="130" rx="25" ry="60" fill="url(#aigrd2)" filter="url(#glow2)" opacity="0.7" transform="rotate(288,200,200)"/>
+              <circle cx="200" cy="200" r="18" fill="#00ff88" filter="url(#glow2)"/>
+              <circle cx="200" cy="200" r="8" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Neon Bloom Matrix</h4>
+              <p>AI Futuristic · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Neon Bloom Matrix','AI Futuristic · 2024','A cyberpunk flower built from glowing green neon wireframes floating in a digital void with data grid background.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="surreal">
+        <div class="gallery-img-wrap art-placeholder aip-3">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="aigrd3" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#fbbf24"/>
+                  <stop offset="30%" stop-color="#f97316"/>
+                  <stop offset="60%" stop-color="#dc2626"/>
+                  <stop offset="100%" stop-color="#4c0519"/>
+                </radialGradient>
+                <filter id="glow3">
+                  <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect width="400" height="400" fill="#0a0005"/>
+              <ellipse cx="200" cy="200" rx="120" ry="120" fill="#4c0519" opacity="0.3"/>
+              <!-- fire petals -->
+              <path d="M200,90 C220,120 215,160 200,170 C185,160 180,120 200,90Z" fill="url(#aigrd3)" filter="url(#glow3)"/>
+              <path d="M200,90 C220,120 215,160 200,170 C185,160 180,120 200,90Z" fill="url(#aigrd3)" filter="url(#glow3)" transform="rotate(60,200,200)"/>
+              <path d="M200,90 C220,120 215,160 200,170 C185,160 180,120 200,90Z" fill="url(#aigrd3)" filter="url(#glow3)" transform="rotate(120,200,200)"/>
+              <path d="M200,90 C220,120 215,160 200,170 C185,160 180,120 200,90Z" fill="url(#aigrd3)" filter="url(#glow3)" transform="rotate(180,200,200)"/>
+              <path d="M200,90 C220,120 215,160 200,170 C185,160 180,120 200,90Z" fill="url(#aigrd3)" filter="url(#glow3)" transform="rotate(240,200,200)"/>
+              <path d="M200,90 C220,120 215,160 200,170 C185,160 180,120 200,90Z" fill="url(#aigrd3)" filter="url(#glow3)" transform="rotate(300,200,200)"/>
+              <circle cx="200" cy="200" r="20" fill="#fbbf24" filter="url(#glow3)"/>
+              <circle cx="200" cy="200" r="8" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Phoenix Flower</h4>
+              <p>AI Surreal · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Phoenix Flower','AI Surreal · 2024','An AI-imagined phoenix flower with fire-like petals that appear to burn with golden and crimson light.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="crystal">
+        <div class="gallery-img-wrap art-placeholder aip-4">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="aigrd4" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#e0f2fe"/>
+                  <stop offset="50%" stop-color="#7dd3fc"/>
+                  <stop offset="100%" stop-color="#0284c7"/>
+                </linearGradient>
+                <filter id="glow4">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect width="400" height="400" fill="#020c1b"/>
+              <polygon points="200,80 215,140 260,120 240,170 290,175 250,205 270,250 220,235 200,280 180,235 130,250 150,205 110,175 160,170 140,120 185,140" fill="url(#aigrd4)" opacity="0.7" filter="url(#glow4)"/>
+              <polygon points="200,100 212,148 250,132 234,175 278,180 244,206 262,244 216,231 200,268 184,231 138,244 156,206 122,180 166,175 150,132 188,148" fill="#bae6fd" opacity="0.3"/>
+              <circle cx="200" cy="185" r="22" fill="url(#aigrd4)" filter="url(#glow4)"/>
+              <circle cx="200" cy="185" r="10" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Ice Crystal Dahlia</h4>
+              <p>AI Crystal · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Ice Crystal Dahlia','AI Crystal · 2024','A perfectly symmetrical dahlia reconstructed in ice crystal form — pure, geometric, and impossibly beautiful.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="futuristic">
+        <div class="gallery-img-wrap art-placeholder aip-5">
+          <div class="placeholder-art">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="aigrd5" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#d946ef"/>
+                  <stop offset="50%" stop-color="#a855f7"/>
+                  <stop offset="100%" stop-color="#6366f1"/>
+                </linearGradient>
+                <filter id="glow5">
+                  <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect width="400" height="400" fill="#04001a"/>
+              <!-- rotating petals holographic -->
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.9"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.7" transform="rotate(30,200,200)"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.5" transform="rotate(60,200,200)"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.4" transform="rotate(90,200,200)"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.3" transform="rotate(120,200,200)"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.3" transform="rotate(150,200,200)"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.4" transform="rotate(180,200,200)"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.5" transform="rotate(210,200,200)"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.7" transform="rotate(240,200,200)"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.9" transform="rotate(270,200,200)"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.7" transform="rotate(300,200,200)"/>
+              <ellipse cx="200" cy="140" rx="20" ry="60" fill="url(#aigrd5)" filter="url(#glow5)" opacity="0.9" transform="rotate(330,200,200)"/>
+              <circle cx="200" cy="200" r="25" fill="url(#aigrd5)" filter="url(#glow5)"/>
+              <circle cx="200" cy="200" r="10" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h4>Holographic Iris</h4>
+              <p>AI Futuristic · 2024</p>
+              <button class="btn-view" onclick="openLightbox(null,'Holographic Iris','AI Futuristic · 2024','A spectacular holographic iris flower with transparent layered petals of shifting purple and violet light.')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ ABOUT SECTION ══════════════════════ -->
+  <section class="about" id="about">
+    <div class="about-container">
+      <div class="about-text">
+        <span class="section-tag">About Petal Studio</span>
+        <h2 class="section-title">Celebrating Flowers <span class="gradient-text">in Every Form</span></h2>
+        <p>Petal Studio is dedicated to showcasing the full spectrum of floral beauty — from classical botanical paintings to modern digital edits and the cutting-edge world of AI-generated art.</p>
+        <p>We believe flowers represent something universal: growth, beauty, and the passage of time. By exploring flowers through art, editing, and AI, we discover new dimensions of this timeless subject.</p>
+        <div class="about-features">
+          <div class="feature">
+            <div class="feature-icon">🎨</div>
+            <div>
+              <h4>Curated Art</h4>
+              <p>Handpicked botanical illustrations and paintings from talented artists worldwide.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">✨</div>
+            <div>
+              <h4>Expert Editing</h4>
+              <p>Professional photo editing transforming real flowers into digital masterpieces.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🤖</div>
+            <div>
+              <h4>AI Innovation</h4>
+              <p>Exploring the frontier of AI-generated floral art — beautiful and impossible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-flower-grid">
+          <div class="about-img-card">
+            <img src="art_flower.png" alt="Art flower" />
+            <span>Art</span>
+          </div>
+          <div class="about-img-card">
+            <img src="edited_flower.png" alt="Edited flower" />
+            <span>Edited</span>
+          </div>
+          <div class="about-img-card">
+            <img src="ai_flower.png" alt="AI flower" />
+            <span>AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ NEWSLETTER ══════════════════════ -->
+  <section class="newsletter">
+    <div class="newsletter-content">
+      <div class="newsletter-icon">✿</div>
+      <h2>Stay in Bloom</h2>
+      <p>Get weekly curated floral art, editing tutorials, and the latest AI flower creations delivered to your inbox.</p>
+      <form class="newsletter-form" id="newsletterForm" onsubmit="handleSubscribe(event)">
+        <input type="email" id="emailInput" placeholder="your@email.com" required />
+        <button type="submit" id="subscribeBtn">Subscribe</button>
+      </form>
+      <p class="newsletter-note" id="newsletterMsg"></p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ FOOTER ══════════════════════ -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">✿ Petal Studio</div>
+        <p>Where flowers become art. Explore the most beautiful floral gallery on the web.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" id="footerInstagram" aria-label="Instagram">📸</a>
+          <a href="#" class="social-btn" id="footerPinterest" aria-label="Pinterest">📌</a>
+          <a href="#" class="social-btn" id="footerTwitter" aria-label="Twitter">🐦</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Gallery</h4>
+          <a href="#art">Art Flowers</a>
+          <a href="#edited">Edited Flowers</a>
+          <a href="#ai">AI Flowers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <a href="#about">About Us</a>
+          <a href="#categories">Collections</a>
+          <a href="#newsletter">Newsletter</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="#">Submit Your Art</a>
+          <a href="#">Commissions</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Petal Studio. Crafted with 🌸 and a love for flowers.</p>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════ LIGHTBOX ══════════════════════ -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+    <button class="lightbox-close" id="lightboxClose" onclick="closeLightbox()">✕</button>
+    <div class="lightbox-content">
+      <div class="lightbox-img-wrap" id="lightboxImgWrap">
+        <img id="lightboxImg" src="" alt="" />
+        <div id="lightboxPlaceholder" class="lightbox-placeholder"></div>
+      </div>
+      <div class="lightbox-info">
+        <h3 id="lightboxTitle"></h3>
+        <p id="lightboxMeta"></p>
+        <p id="lightboxDesc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
